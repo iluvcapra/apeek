@@ -1,5 +1,5 @@
 """
-apeek
+apeek is a package for creating audio waveform previews.
 """
 
 __version__ = "0.0.1"
