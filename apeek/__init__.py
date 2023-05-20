@@ -18,7 +18,7 @@ def rectified_unicode_waveform_charmatrix(data: np.array, height: int) -> List[L
     FULL_BLOCK = "█"
     levels = height * (len(BLOCK_CHARS))
 
-    accum_array = []
+    retval = []
 
     for i, sample_pair in enumerate(data):
         rectified_value = max(abs(sample_pair[0]), abs(sample_pair[1]))
@@ -27,9 +27,9 @@ def rectified_unicode_waveform_charmatrix(data: np.array, height: int) -> List[L
         full, partial = divmod(leveled_value, len(BLOCK_CHARS))
         blank = height - full
 
-        accum_array += [list( FULL_BLOCK * full + BLOCK_CHARS[partial] + BLOCK_CHARS[0] * blank)]
+        retval += [list( FULL_BLOCK * full + BLOCK_CHARS[partial] + BLOCK_CHARS[0] * blank)]
 
-    return accum_array
+    return retval
 
 
 def unicode_waveform(data: np.array, height: int) -> str:

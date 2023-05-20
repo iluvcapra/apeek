@@ -54,6 +54,7 @@ def main():
             print(file + ":")
 
         sys.stdout.write(text)
+        sys.stdout.write("\n")
 
         if options.info:
             peak_db = 20 * math.log10(result.max_value / result.full_code_value)
