@@ -25,3 +25,4 @@ $ apeek -l12 -i test/media/hi.wav
 DUR: 0.60 seconds @ 22050Fs // Peak: -2.39 dBFS at 0.31 secs                                         
 ```
 ![Screenshot](docs/apeek.png)
+
