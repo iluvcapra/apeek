@@ -15,13 +15,13 @@ def main():
     console_width = shutil.get_terminal_size((80,20))[0]
 
     parser = optparse.OptionParser(version=apeek.__version__)
-    parser.add_option("-w","--width", help="Waveform width",
+    parser.add_option("-w","--width", help="Waveform width [defaults to terminal width]",
                       type=int,
                       metavar="WIDTH", default=console_width)
     parser.add_option("-l","--lines", help="Waveform height in lines",
                       dest="height", type=int,
                       metavar="HEIGHT", default=4)
-    parser.add_option("-s","--scaling",help="Set scaling mode (linear, root)",
+    parser.add_option("-s","--scaling",help="Set scaling mode (linear, root) [defaults to root]",
                       dest="scaling", choices=("linear","root"),
                       default="root")
     parser.add_option("-i","--info", help="Print statistics", 
