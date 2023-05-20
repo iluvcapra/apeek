@@ -36,7 +36,7 @@ class WaveformData:
     def create_waveform_data(cls,
                              audio: AudioSegment, 
                              time_bins: int, 
-                             settings: 'Settings' = WaveformDataSettings.default()) -> 'WaveformData':
+                             settings: WaveformDataSettings = WaveformDataSettings.default()) -> 'WaveformData':
         """
         Create a numpy array for use in drawing a waveform overview.
      
