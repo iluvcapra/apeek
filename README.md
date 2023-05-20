@@ -1,5 +1,7 @@
 # apeek
 
+![](https://img.shields.io/github/license/iluvcapra/apeek.svg) ![](https://img.shields.io/pypi/pyversions/apeek.svg) [![](https://img.shields.io/pypi/v/apeek.svg)](https://pypi.org/project/apeek/) ![](https://img.shields.io/pypi/wheel/apeek.svg)
+
 `apeek` is a package for creating audio waveform previews.
 
 The library installs a command `apeek` for generating waveform overviews with Unicode 
