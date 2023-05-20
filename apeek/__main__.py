@@ -4,6 +4,7 @@ apeek main
 
 import pydub
 import apeek
+from apeek import WaveformData, WaveformDataSettings, ScalingFactor
 
 import sys
 import shutil
@@ -34,24 +35,26 @@ def main():
 
     for file in args:
         audio = pydub.AudioSegment.from_file(file)
-        settings = apeek.WaveformSettings.default()
+        settings = WaveformDataSettings.default()
 
         if options.scaling == "linear":
-            settings['scaling'] = apeek.ScalingFactor.LINEAR
+            settings['scaling'] = ScalingFactor.LINEAR
         else:
-            settings['scaling'] = apeek.ScalingFactor.ROOT
+            settings['scaling'] = ScalingFactor.ROOT
         
         settings['normalized'] = True
 
         if options.absolute:
             settings['normalized'] = False
 
-        result = apeek.create_waveform_data(audio, length=options.width, settings=settings)
+        result = WaveformData.create_waveform_data(audio, length=options.width, settings=settings)
         text = apeek.rectified_unicode_waveform(result.value_pairs, height=options.height)
+
         if len(args) > 1:
             print(file)
 
         sys.stdout.write(text)
+
         if options.info:
             peak_db = 20 * math.log10(result.max_value / result.full_code_value)
             if result.max_index > 6:
