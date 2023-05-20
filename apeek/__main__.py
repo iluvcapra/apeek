@@ -47,7 +47,7 @@ def main():
         if options.absolute:
             settings['normalized'] = False
 
-        result = WaveformData.create_waveform_data(audio, length=options.width, settings=settings)
+        result = WaveformData.create_waveform_data(audio, time_bins=options.width, settings=settings)
         text = apeek.rectified_unicode_waveform(result.value_pairs, height=options.height)
 
         if len(args) > 1:

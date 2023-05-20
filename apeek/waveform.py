@@ -23,17 +23,19 @@ class WaveformDataSettings(TypedDict):
 
 @dataclass
 class WaveformData:
+    """
+    Data collected from an AudioSegment to be used for drawing a waveform.
+    """
     value_pairs: np.array
     max_index: int
     max_sample: int
     max_value: float
     full_code_value: float
 
-
     @classmethod
     def create_waveform_data(cls,
                              audio: AudioSegment, 
-                             length: int, 
+                             time_bins: int, 
                              settings: 'Settings' = WaveformDataSettings.default()) -> 'WaveformData':
         """
         Create a numpy array for use in drawing a waveform overview.
@@ -41,14 +43,14 @@ class WaveformData:
         """
         samples = audio.get_array_of_samples()
         bit_depth = audio.sample_width
-        window_length = int(len(samples) / length)
+        window_length = int(len(samples) / time_bins)
 
-        retval = np.zeros((length, 2))
+        retval = np.zeros((time_bins, 2))
         
         max_index = 0
         max_value = 0.0
         max_sample = 0
-        for i in range(length):
+        for i in range(time_bins):
             window = samples[i * window_length : (i + 1) * window_length]
             retval[i] = (np.max(window),np.min(window))
             magnitude = np.max(np.abs(window))

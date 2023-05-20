@@ -11,7 +11,7 @@ from .waveform import WaveformData, WaveformDataSettings, ScalingFactor
 
 def rectified_unicode_waveform(data: np.array, height: int = 10) -> str:
     
-    BLOCK_CHARS = list(" ▁▂▃▄▅▆▇")
+    BLOCK_CHARS = list("·▁▂▃▄▅▆▇")
     FULL_BLOCK = "█"
     levels = height * (8)
 
@@ -24,7 +24,7 @@ def rectified_unicode_waveform(data: np.array, height: int = 10) -> str:
         full, partial = divmod(leveled_value, 8)
         blank = height - full
 
-        accum_array += [list( FULL_BLOCK * full + BLOCK_CHARS[partial] + " " * blank)]
+        accum_array += [list( FULL_BLOCK * full + BLOCK_CHARS[partial] + BLOCK_CHARS[0] * blank)]
     
     # transpose
     retval_lines = list()
