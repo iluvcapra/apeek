@@ -48,10 +48,10 @@ def main():
             settings['normalized'] = False
 
         result = WaveformData.create_waveform_data(audio, time_bins=options.width, settings=settings)
-        text = apeek.rectified_unicode_waveform(result.value_pairs, height=options.height)
+        text = apeek.unicode_waveform(result.value_pairs, height=options.height)
 
         if len(args) > 1:
-            print(file)
+            print(file + ":")
 
         sys.stdout.write(text)
 
@@ -64,6 +64,7 @@ def main():
 
             print(f"DUR: {audio.frame_count() / audio.frame_rate:.2f} seconds @ {audio.frame_rate}Fs // " +
             f"Peak: {peak_db:.2f} dBFS at {result.max_sample / audio.frame_count():.2f} secs")
+
 
 if __name__ == "__main__":
     main()
