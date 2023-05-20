@@ -10,11 +10,11 @@ import numpy as np
 
 from .waveform import WaveformData, WaveformDataSettings, ScalingFactor
 
-def rectified_unicode_waveform_charmatrix(data: np.array, height: int) -> List[List[str]]:
+def rectified_unicode_waveform_charmatrix(data: np.array, height: int, bg: str = "·") -> List[List[str]]:
     """ 
     Create a grid of strs for a rectified waveform bargraph
     """
-    BLOCK_CHARS = list("·▁▂▃▄▅▆▇")
+    BLOCK_CHARS = list(f"{bg}▁▂▃▄▅▆▇")
     FULL_BLOCK = "█"
     levels = height * (len(BLOCK_CHARS))
 
