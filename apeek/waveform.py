@@ -4,7 +4,7 @@ from pydub import AudioSegment
 from math import sqrt
 from enum import Enum
 from dataclasses import dataclass
-from typing import Tuple, TypedDict
+from typing import Tuple, TypedDict, Optional
 
 
 class ScalingFactor(Enum):
@@ -31,19 +31,26 @@ class WaveformData:
     max_sample: int
     max_value: float
     full_code_value: float
+    samples_per_bin: int
 
     @classmethod
     def create_waveform_data(cls,
                              audio: AudioSegment, 
-                             time_bins: int, 
+                             time_bins: Optional[int],
+                             bin_length: Optional[int] = None,
                              settings: WaveformDataSettings = WaveformDataSettings.default()) -> 'WaveformData':
         """
         Create a numpy array for use in drawing a waveform overview.
      
         """
-        samples = audio.get_array_of_samples()
-        bit_depth = audio.sample_width
-        window_length = int(len(samples) / time_bins)
+        assert(time_bins or bin_length)
+
+        if time_bins is not None:
+            samples = audio.get_array_of_samples()
+            bit_depth = audio.sample_width
+            window_length = int(len(samples) / time_bins)
+        else:
+            window_length = bin_length
 
         retval = np.zeros((time_bins, 2))
         
@@ -73,6 +80,6 @@ class WaveformData:
             absval = np.sqrt(np.fabs(retval))
             retval = retval * signs
 
-        return cls(retval, max_index, max_sample, max_value, full_code_value)
+        return cls(retval, max_index, max_sample, max_value, full_code_value, samples_per_bin=window_length)
 
 
