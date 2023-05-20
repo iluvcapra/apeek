@@ -18,7 +18,7 @@ class TestWaveformData(unittest.TestCase):
         settings['normalized'] = True
         result = create_waveform_data(self.hi_audio, 100, settings=settings)
 
-        transposed = result.transpose()
+        transposed = result.value_pairs.transpose()
         max_v, min_v = numpy.max(transposed[0]) , abs(numpy.min(transposed[1]))
         self.assertLessEqual(max(max_v, min_v), 1.0)
 
