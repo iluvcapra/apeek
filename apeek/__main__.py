@@ -40,7 +40,13 @@ def main():
         sys.stdout.write(text)
         if options.info:
             peak_db = 20 * math.log10(result.max_value / result.full_code_value)
-            print(f"Peak: {peak_db:.2f} dBFS at {result.max_sample / audio.frame_count():.2f} secs")
+            if result.max_index > 6:
+                print(" " * (result.max_index - 4) + "max ↑" )
+            else:
+                print(" " * (result.max_index) + "↑ max" )
+
+            print(f"DUR: {audio.frame_count() / audio.frame_rate:.2f} seconds @ {audio.frame_rate}Fs // " +
+            f"Peak: {peak_db:.2f} dBFS at {result.max_sample / audio.frame_count():.2f} secs")
 
 if __name__ == "__main__":
     main()
