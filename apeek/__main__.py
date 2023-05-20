@@ -21,17 +21,31 @@ def main():
     parser.add_option("-l","--lines", help="Waveform height in lines",
                       dest="height", type=int,
                       metavar="HEIGHT", default=4)
+    parser.add_option("-s","--scaling",help="Set scaling mode (linear, root)",
+                      dest="scaling", choices=("linear","root"),
+                      default="root")
     parser.add_option("-i","--info", help="Print statistics", 
                       default=False, 
                       action='store_true')
+    parser.add_option("-a","--absolute", help="Do not normalize waveform",
+                      default=False, action='store_true')
 
     (options, args) = parser.parse_args()
 
     for file in args:
         audio = pydub.AudioSegment.from_file(file)
         settings = apeek.WaveformSettings.default()
-        settings['scaling'] = apeek.ScalingFactor.ROOT
+
+        if options.scaling == "linear":
+            settings['scaling'] = apeek.ScalingFactor.LINEAR
+        else:
+            settings['scaling'] = apeek.ScalingFactor.ROOT
+        
         settings['normalized'] = True
+
+        if options.absolute:
+            settings['normalized'] = False
+
         result = apeek.create_waveform_data(audio, length=options.width, settings=settings)
         text = apeek.rectified_unicode_waveform(result.value_pairs, height=options.height)
         if len(args) > 1:
