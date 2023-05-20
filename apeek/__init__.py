@@ -80,8 +80,9 @@ def create_waveform_data(audio: AudioSegment,
 
 def rectified_ascii_waveform(data: np.array, height: int = 10) -> str:
     
-    BLOCK_CHARS = list("▁▂▃▄▅▆▇█")
-    levels = height * len(BLOCK_CHARS)
+    BLOCK_CHARS = list(" ▁▂▃▄▅▆▇")
+    FULL_BLOCK = "█"
+    levels = height * (8)
 
     accum_array = []
 
@@ -89,16 +90,14 @@ def rectified_ascii_waveform(data: np.array, height: int = 10) -> str:
         rectified_value = max(abs(sample_pair[0]), abs(sample_pair[1]))
         leveled_value = int(rectified_value * levels)
         
-        full, partial = divmod(leveled_value, len(BLOCK_CHARS))
+        full, partial = divmod(leveled_value, 8)
         blank = height - full
-        if partial == 0:
-            blank += 1
 
-        accum_array += [list(str(BLOCK_CHARS[-1]) * full + BLOCK_CHARS[partial] + " " * blank )]
+        accum_array += [list( FULL_BLOCK * full + BLOCK_CHARS[partial] + " " * blank)]
     
     # transpose
     retval_lines = list()
-    for j in range(height,0,-1):
+    for j in reversed(range(height)):
         this_line = ""
         for i in range(len(accum_array)):
             this_line = this_line + accum_array[i][j]
