@@ -41,7 +41,7 @@ name = "apeek"
 
 [project.urls]
 Home = "https://github.com/iluvcapra/apeek"
-# Documentation = "https://wavinfo.readthedocs.io/"
+# Documentation = "https://apeek.readthedocs.io/"
 Source = "https://github.com/iluvcapra/apeek.git"
 Issues = 'https://github.com/iluvcapra/apeek/issues' 
 
