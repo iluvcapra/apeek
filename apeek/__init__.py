@@ -78,7 +78,7 @@ def create_waveform_data(audio: AudioSegment,
     return WaveformData(retval, max_index, max_sample, max_value, full_code_value)
 
 
-def rectified_ascii_waveform(data: np.array, height: int = 10) -> str:
+def rectified_unicode_waveform(data: np.array, height: int = 10) -> str:
     
     BLOCK_CHARS = list(" ▁▂▃▄▅▆▇")
     FULL_BLOCK = "█"

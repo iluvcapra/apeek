@@ -33,7 +33,7 @@ def main():
         settings['scaling'] = apeek.ScalingFactor.ROOT
         settings['normalized'] = True
         result = apeek.create_waveform_data(audio, length=options.width, settings=settings)
-        text = apeek.rectified_ascii_waveform(result.value_pairs, height=options.height)
+        text = apeek.rectified_unicode_waveform(result.value_pairs, height=options.height)
         if len(args) > 1:
             print(file)
 
