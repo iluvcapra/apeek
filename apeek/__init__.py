@@ -8,9 +8,9 @@ from typing import List
 
 import numpy as np
 
-from .waveform import WaveformData, WaveformDataSettings, ScalingFactor
+from .waveform import WaveformData, WaveformDataSettings, ScalingFactor, default_settings
 
-def rectified_unicode_waveform_charmatrix(data: np.array, height: int, bg: str = "·") -> List[List[str]]:
+def rectified_unicode_waveform_charmatrix(data: np.ndarray, height: int, bg: str = "·") -> List[List[str]]:
     """ 
     Create a grid of strs for a rectified waveform bargraph
     """
@@ -20,7 +20,7 @@ def rectified_unicode_waveform_charmatrix(data: np.array, height: int, bg: str =
 
     retval = []
 
-    for i, sample_pair in enumerate(data):
+    for _, sample_pair in enumerate(data):
         rectified_value = max(abs(sample_pair[0]), abs(sample_pair[1]))
         leveled_value = int(rectified_value * levels)
         
@@ -32,7 +32,7 @@ def rectified_unicode_waveform_charmatrix(data: np.array, height: int, bg: str =
     return retval
 
 
-def unicode_waveform(data: np.array, height: int) -> str:
+def unicode_waveform(data: np.ndarray, height: int) -> str:
     
     char_matrix = rectified_unicode_waveform_charmatrix(data, height)
     
