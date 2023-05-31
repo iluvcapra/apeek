@@ -81,7 +81,8 @@ class WaveformData:
             sample_max = np.max(retval)
             sample_min = np.min(retval)
             scale_max = max(abs(sample_max), abs(sample_min))
-            retval = retval / scale_max
+            if scale_max != 0:
+                retval = retval / scale_max
 
         if settings['scaling'] == ScalingFactor.ROOT:
             signs = np.sign(retval)
