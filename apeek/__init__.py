@@ -2,7 +2,7 @@
 apeek is a package for creating audio waveform previews.
 """
 
-__version__ = "0.1.1"
+__version__ = "0.2.0"
 
 from typing import List
 
